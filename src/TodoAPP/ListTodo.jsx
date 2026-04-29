@@ -6,6 +6,7 @@ class ListTodo extends React.Component {
     state = {
         ArrList: [],
         ShowList: false,
+        EditList: {}
     }
 
     handleShowList = (event) => {
@@ -15,10 +16,8 @@ class ListTodo extends React.Component {
     }
 
     AddList = (todo) => {
-        let currentList = this.state.ArrList
-        currentList.push(todo)
         this.setState({
-            ArrList: currentList
+            ArrList: [...this.state.ArrList, todo]
         })
     }
 
@@ -30,11 +29,41 @@ class ListTodo extends React.Component {
         })
     }
 
+    EditTodo = (todo) => {
+        let { EditList, ArrList } = this.state;
+        let isEmptyObj = Object.keys(EditList).length === 0;
+
+        if (isEmptyObj === false && EditList.id === todo.id) {
+            let ArrListCopy = [...ArrList];
+            let objIndex = ArrListCopy.findIndex((item => item.id === todo.id));
+
+            ArrListCopy[objIndex].title = EditList.title;
+
+            this.setState({
+                ArrList: ArrListCopy,
+                EditList: {}
+            })
+            return;
+        }
+
+        this.setState({
+            EditList: todo
+        })
+    }
+
+    handleEditTodo = (event) => {
+        let EditCopy = { ...this.state.EditList }
+        EditCopy.title = event.target.value
+        this.setState({
+            EditList: EditCopy
+        })
+    }
 
 
     render() {
 
-        let { ArrList, ShowList } = this.state
+        let { ArrList, ShowList, EditList } = this.state
+        let isEmptyObj = Object.keys(EditList).length === 0
 
         return (
             <div className='list-todo-container'>
@@ -59,13 +88,30 @@ class ListTodo extends React.Component {
                                 ArrList && ArrList.length > 0 &&
                                 ArrList.map((item, index) =>
                                     <div key={item.id}>
-                                        <span> {index + 1} - {item.id} - {item.name} </span>
+                                        {isEmptyObj === true ?
+                                            <span> {index + 1} - {item.id} - {item.title} </span>
+                                            :
+                                            <>
+                                                {
+                                                    EditList.id === item.id ?
+                                                        <span> {index + 1} - {item.id} - <input
+                                                            onChange={(event) => this.handleEditTodo(event)}
+                                                            value={EditList.title} /></span>
+                                                        :
+                                                        <span> {index + 1} - {item.id} - {item.title} </span>
+                                                }
+                                            </>
+                                        }
                                         <span>
                                             <button
                                                 onClick={() => this.DeleteList(item)}
                                             > Delete </button>
 
-                                            <button> Edit </button>
+                                            <button
+                                                onClick={() => this.EditTodo(item)}
+                                            >
+                                                {isEmptyObj === false && EditList.id === item.id ? 'Save' : 'Edit'}
+                                            </button>
                                         </span>
                                     </div>
                                 )

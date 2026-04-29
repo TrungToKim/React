@@ -35,7 +35,6 @@ class AddTodo extends React.Component {
             </div>
         )
     }
-
 }
 
 export default AddTodo
