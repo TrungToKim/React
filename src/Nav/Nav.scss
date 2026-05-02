@@ -4,8 +4,7 @@
     overflow: hidden;
 }
 
-/* Style the links inside the navigation bar */
-.topnav a {
+.top-left-nav a {
     float: left;
     color: #f2f2f2;
     text-align: center;
@@ -14,14 +13,23 @@
     font-size: 17px;
 }
 
-/* Change the color of links on hover */
-.topnav a:hover {
+.top-right-nav a {
+    float: right;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.top-left-nav a:hover,
+.top-right-nav a:hover {
     background-color: #ddd;
     color: black;
 }
 
-/* Add a color to the active/current link */
-.topnav a.active {
+.top-left-nav a.active,
+.top-right-nav a.active {
     background-color: #04AA6D;
     color: white;
 }
