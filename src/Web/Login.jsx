@@ -4,8 +4,8 @@ import SignUp from "./SignUp";
 import ResetPassword from './ResetPassword'
 import './WebSass/Login.sass'
 
-export function withNavigation(Component) {
-    return props => <Component {...props} navigate={useNavigate()} />;
+function withNavigation(Component) {
+    return (props) => <Component {...props} navigate={useNavigate()} />;
 }
 
 class Login extends React.Component {
@@ -34,18 +34,14 @@ class Login extends React.Component {
                 ?
                 alert('Error! , Please enter name and password')
                 :
-                alert('Login Success')
+                setTimeout(() => {
+                    this.props.navigate('/Home')
+                }, 3000)
         }
     }
 
-    componentDidMount() {
-        setTimeout(() => {
-            navigate('/')
-        }, 3000)
-    }
-
     render() {
-        let { name, password } = this.state
+        let { name, password, navigate } = this.state
         return (
             <>
                 <form action="">
@@ -68,6 +64,7 @@ class Login extends React.Component {
                                 onChange={(event) => this.handlePassword(event)}
                             /> <br />
                         </span>
+
                         <span className="btn-login-form">
                             <button
                                 className="login-btn"
@@ -75,12 +72,14 @@ class Login extends React.Component {
                             > Login </button> <br />
                         </span>
 
-                        <span className="create-account">
-                            <Link to="/SignUp">CreateAccount</Link>
-                        </span>
+                        <span className="form-create-reset">
+                            <span className="form-create">
+                                <Link to="/SignUp">CreateAccount</Link>
+                            </span>
 
-                        <span className="reset-password">
-                            <Link to="/ResetPassword">Forgot Password?</Link>
+                            <span className="form-reset">
+                                <Link to="/ResetPassword">Forgot Password?</Link>
+                            </span>
                         </span>
                     </div>
                 </form>

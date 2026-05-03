@@ -3,9 +3,11 @@ import React from "react";
 class Contact extends React.Component {
     render() {
         return (
-            <div>
-                <p>HELLO Contact</p>
-            </div>
+            <>
+                <div>
+                    <p>Hello Contact</p>
+                </div>
+            </>
         )
     }
 }

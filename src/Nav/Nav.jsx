@@ -8,10 +8,9 @@ class Nav extends React.Component {
         return (
             <>
                 <div className='top-left-nav'>
-                    <Link to="/">Home</Link>
+                    <Link to="/Home">Home</Link>
                     <Link to="/Todo">ToDo</Link>
                     <Link to="/Contact">Contact</Link>
-                    <Link to="/About">About</Link>
                 </div >
 
                 <div className='top-right-nav'>

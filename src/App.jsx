@@ -3,7 +3,8 @@ import './App.scss'
 import ListTodo from './TodoAPP/ListTodo'
 import { BrowserRouter, Routes, Route, Link, } from 'react-router-dom';
 import Nav from './Nav/Nav'
-import { Home, Contact, About, Login, SignUp, ResetPassword } from './Web/indexWeb'
+import { Home, Contact, Login, SignUp, ResetPassword } from './Web/indexWeb'
+import ListUser from './User/ListUser';
 
 function App() {
   return (
@@ -11,12 +12,11 @@ function App() {
       <BrowserRouter>
         <div className="App">
           <Nav />
-          {/* <ListTodo /> */}
+          {/* <ListUser /> */}
         </div>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/Home" element={<Home />} />
           <Route path="/Todo" element={<ListTodo />} />
-          <Route path="/About" element={<About />} />
           <Route path="/Contact" element={<Contact />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/SignUp" element={<SignUp />} />
